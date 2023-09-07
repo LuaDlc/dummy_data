@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../models/category.dart';
-import '../pages/categories_meals_pages.dart';
 
 class CategoryWidget extends StatelessWidget {
   final Category? category;
   const CategoryWidget({super.key, required this.category});
 
   void _selectCategory(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-      return CategoriesMealsPages(
-        category: category,
-      ); //recebendo a instancia de categoriesmealspage
-    }));
+    Navigator.of(context).pushNamed('/categories-meals', arguments: category);
   }
 
   @override

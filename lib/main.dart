@@ -1,3 +1,4 @@
+import 'package:dummy_data/pages/categories_meals_pages.dart';
 import 'package:dummy_data/pages/categories_pages.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: true,
       title: 'Vamos cozinhar?',
       theme: ThemeData(
           primarySwatch: Colors.pink,
@@ -19,6 +21,7 @@ class MyApp extends StatelessWidget {
               titleMedium: const TextStyle(
                   fontSize: 20, fontFamily: 'RobotoCondensed'))),
       home: const CategoriesPages(),
+      routes: {'/categories-meals': (_) => const CategoriesMealsPages()},
     );
   }
 }

@@ -3,7 +3,9 @@ import 'package:dummy_data/widgets/category_widget.dart';
 import 'package:flutter/material.dart';
 
 class CategoriesPages extends StatelessWidget {
-  const CategoriesPages({super.key});
+  const CategoriesPages({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

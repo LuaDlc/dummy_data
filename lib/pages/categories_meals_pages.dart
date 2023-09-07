@@ -6,21 +6,18 @@ import 'package:dummy_data/models/category.dart';
 class CategoriesMealsPages extends StatelessWidget {
   const CategoriesMealsPages({
     Key? key,
-    this.category,
   }) : super(key: key);
 
   /* atributo de categories */
-  final Category? category;
 
   @override
   Widget build(BuildContext context) {
+    final category = ModalRoute.of(context)!.settings.arguments as Category;
     return Scaffold(
       appBar: AppBar(
-        title: Text(category!.title),
+        title: Text(category.title),
       ),
-      body: Container(
-        child: Text('Receitas por categoria ${category!.id}'),
-      ),
+      body: Text('Receitas por categoria ${category.id}'),
     );
   }
 }
