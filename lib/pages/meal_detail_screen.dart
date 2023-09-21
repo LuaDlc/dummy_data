@@ -9,6 +9,32 @@ class MealDetailScreen extends StatefulWidget {
   State<MealDetailScreen> createState() => _MealDetailScreenState();
 }
 
+Widget _createSctionTitle(BuildContext context, String title) {
+  return Container(
+    margin: const EdgeInsets.symmetric(vertical: 5),
+    child: Text(
+      title,
+      style: Theme.of(context).textTheme.titleMedium,
+    ),
+  );
+}
+
+Widget _createSctionContainer(Widget child) {
+  return Container(
+    width: 330,
+    height: 150,
+    padding: const EdgeInsets.all(10),
+    margin: const EdgeInsets.all(10),
+    decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(
+          color: Colors.grey,
+        ),
+        borderRadius: BorderRadius.circular(10)),
+    child: child,
+  );
+}
+
 class _MealDetailScreenState extends State<MealDetailScreen> {
   @override
   Widget build(BuildContext context) {
@@ -20,50 +46,52 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
             meal.title,
           ),
         ),
-        body: Column(
-          children: [
-            SizedBox(
-              //imagem
-              height: 300,
-              width: double.infinity,
-              child: Image.network(
-                meal.imageUrl,
-                fit: BoxFit.cover,
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                //imagem
+                height: 300,
+                width: double.infinity,
+                child: Image.network(
+                  meal.imageUrl,
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 5),
-              child: Text(
-                'Ingredientes',
-                style: Theme.of(context).textTheme.titleMedium,
+              _createSctionTitle(context, 'ingredientes'),
+              _createSctionContainer(
+                ListView.builder(
+                    itemCount: meal.ingredients
+                        .length, //percorre a lista apenas a quantidade de itens da lista
+                    itemBuilder: (ctx, index) {
+                      return Card(
+                        color: Theme.of(context).cardColor,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 5, horizontal: 10),
+                          child: Text(meal.ingredients[index]),
+                        ),
+                      );
+                    }),
               ),
-            ),
-            Container(
-              width: 300,
-              height: 150,
-              padding: const EdgeInsets.all(10),
-              margin: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(
-                    color: Colors.grey,
-                  ),
-                  borderRadius: BorderRadius.circular(10)),
-              child: ListView.builder(
-                  itemCount: meal.ingredients
-                      .length, //percorre a lista apenas a quantidade de itens da lista
-                  itemBuilder: (ctx, index) {
-                    return Card(
-                      color: Theme.of(context).cardColor,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 5, horizontal: 10),
-                        child: Text(meal.ingredients[index]),
-                      ),
+              _createSctionTitle(context, 'Passos'),
+              _createSctionContainer(ListView.builder(
+                  itemCount: meal.steps.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        ListTile(
+                          leading: CircleAvatar(
+                            child: Text('${index + 1}'),
+                          ),
+                          title: Text(meal.steps[index]),
+                        ),
+                        const Divider()
+                      ],
                     );
-                  }),
-            )
-          ],
+                  }))
+            ],
+          ),
         ));
   }
 }
