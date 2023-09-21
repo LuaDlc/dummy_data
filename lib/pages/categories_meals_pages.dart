@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dummy_data/data/dummy_data.dart';
+import 'package:dummy_data/widgets/meal_item.dart';
 import 'package:flutter/material.dart';
 
 import 'package:dummy_data/models/category.dart';
@@ -26,7 +27,9 @@ class CategoriesMealsPages extends StatelessWidget {
         body: ListView.builder(
             itemCount: categoryMeals.length,
             itemBuilder: (context, index) {
-              return Text(categoryMeals[index].title);
+              return MealItem(
+                  meal: categoryMeals[
+                      index]); //recebe agr o MealItem com titulos das categorias via index
             }));
   }
 }
