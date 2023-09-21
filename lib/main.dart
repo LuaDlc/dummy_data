@@ -29,6 +29,24 @@ class MyApp extends StatelessWidget {
         AppRoutes.categoryMeals: (_) => const CategoriesMealsPages(),
         AppRoutes.mealDetailScreen: (_) => const MealDetailScreen(),
       },
+      //TODO: DENTOR DO MATERIAL APP, TEMOS METODOS PARA ROTAS INDEFINIDAS
+      // onGenerateRoute: (settings) {
+      //   //se a rota passada noa funcionae, retorna para alguma outra rota, neste caso tela principal
+      //   if (settings.name == '/alguma-coisa') {
+      //     return null;
+      //   } else if (settings.name == '/outra-coisa') {
+      //     return null;
+      //   } else {
+      //     return MaterialPageRoute(builder: (_) {
+      //       return const CategoriesPages();
+      //     });
+      //   }
+      // },
+      // onUnknownRoute: (settings) {
+      //   return MaterialPageRoute(builder: (_) {
+      //     return const CategoriesPages();
+      //   });
+      // },
     );
   }
 }
