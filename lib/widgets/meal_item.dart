@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+
+import 'package:dummy_data/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 
 import '../models/meal.dart';
@@ -9,11 +11,19 @@ class MealItem extends StatelessWidget {
     Key? key,
     required this.meal,
   }) : super(key: key);
-  void _selectedMeal() {}
+
+  void _selectedMeal(BuildContext context) {
+    Navigator.of(context).pushNamed(AppRoutes.mealDetailScreen,
+        arguments: meal); //chama a rota com o arguemnto
+    //meal, conforme foi criado o meal como as Meal
+    //neste caso preciso usar o buildCOntext e usar o context ao chamar a funcao ja que precisa
+    //usar o context
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: _selectedMeal,
+      onTap: () => _selectedMeal(context),
       child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
