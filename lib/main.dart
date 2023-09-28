@@ -1,5 +1,4 @@
 import 'package:dummy_data/pages/categories_meals_pages.dart';
-import 'package:dummy_data/pages/categories_pages.dart';
 import 'package:dummy_data/pages/meal_detail_screen.dart';
 import 'package:dummy_data/pages/tabs_pages.dart';
 import 'package:dummy_data/utils/app_routes.dart';
