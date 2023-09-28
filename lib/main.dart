@@ -1,6 +1,7 @@
 import 'package:dummy_data/pages/categories_meals_pages.dart';
 import 'package:dummy_data/pages/categories_pages.dart';
 import 'package:dummy_data/pages/meal_detail_screen.dart';
+import 'package:dummy_data/pages/tabs_pages.dart';
 import 'package:dummy_data/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
       //initialRoute: '/', esta é outra forma de carregar o componente inicial
       routes: {
         AppRoutes.home: (ctx) =>
-            const CategoriesPages(), // a barra / é uma forma de carregar o componente inicial do app
+            const TabsPages(), // a barra / é uma forma de carregar o componente inicial do app
         AppRoutes.categoryMeals: (_) => const CategoriesMealsPages(),
         AppRoutes.mealDetailScreen: (_) => const MealDetailScreen(),
       },
