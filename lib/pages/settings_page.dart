@@ -15,7 +15,7 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     var settings = Settings();
     //funcao que retorna um switch
-    Widget _createSwitch(
+    Widget createSwitch(
       String title,
       String subtitle,
       bool value,
@@ -25,6 +25,8 @@ class _SettingsPageState extends State<SettingsPage> {
           title: Text(title),
           subtitle: Text(subtitle),
           value: value,
+          controlAffinity: ListTileControlAffinity.platform,
+          activeColor: Colors.red,
           onChanged:
               onChanged); //adaptative pra definir comportamento diferente dependendo do sitema operacional
     }
@@ -46,7 +48,7 @@ class _SettingsPageState extends State<SettingsPage> {
           Expanded(
             child: ListView(
               children: [
-                _createSwitch(
+                createSwitch(
                   'sem Glutén',
                   'só exibe refeicoes sem gluten',
                   settings.isLactoseFree,
@@ -54,7 +56,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     () => settings.isLactoseFree = value,
                   ),
                 ),
-                _createSwitch(
+                createSwitch(
                   'Vegana',
                   'só exibe refeicoes veganas',
                   settings.isVegan,
@@ -62,7 +64,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     () => settings.isVegan = value,
                   ),
                 ),
-                _createSwitch(
+                createSwitch(
                   'Lactose',
                   'só exibe refeicoes sem lactose',
                   settings.isLactoseFree,
@@ -70,7 +72,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     () => settings.isLactoseFree = value,
                   ),
                 ),
-                _createSwitch(
+                createSwitch(
                   'Vegetariana',
                   'só exibe refeicoes vegetarianas',
                   settings.isVegetarian,
