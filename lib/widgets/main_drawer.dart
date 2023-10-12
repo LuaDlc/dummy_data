@@ -46,10 +46,13 @@ class MainDrawer extends StatelessWidget {
           _creatItem(
             Icons.restaurant,
             'Refeicoes',
-            () => Navigator.of(context).pushNamed('/'),
+            () => Navigator.of(context).pushReplacementNamed('/'),
           ),
-          _creatItem(Icons.settings, 'Config',
-              () => Navigator.of(context).pushNamed(AppRoutes.settings))
+          _creatItem(
+              Icons.settings,
+              'Config',
+              () => Navigator.of(context).pushReplacementNamed(AppRoutes
+                  .settings)) //pushRelacementNamed, remove a ulltima tela e coloca a tela nova
         ],
       ),
     );
