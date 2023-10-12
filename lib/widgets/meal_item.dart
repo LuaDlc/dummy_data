@@ -13,8 +13,18 @@ class MealItem extends StatelessWidget {
   }) : super(key: key);
 
   void _selectedMeal(BuildContext context) {
-    Navigator.of(context).pushNamed(AppRoutes.mealDetailScreen,
-        arguments: meal); //chama a rota com o arguemnto
+    Navigator.of(context)
+        .pushNamed(
+      AppRoutes.mealDetailScreen,
+      arguments: meal,
+    ) //essa funcao com o then traz o resultado no futuro,quando a tela for fechada! trazendo o resultado
+        .then((result) {
+      if (result == null) {
+        print('Sem resultado');
+      } else {
+        print('o nome da refeicao é $result');
+      }
+    }); //chama a rota com o arguemnto
     //meal, conforme foi criado o meal como as Meal
     //neste caso preciso usar o buildCOntext e usar o context ao chamar a funcao ja que precisa
     //usar o context

@@ -41,57 +41,65 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
     final meal = ModalRoute.of(context)!.settings.arguments as Meal;
     //para esta tela ter acesso aos detalhes da refeicao
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            meal.title,
-          ),
+      appBar: AppBar(
+        title: Text(
+          meal.title,
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(
-                //imagem
-                height: 300,
-                width: double.infinity,
-                child: Image.network(
-                  meal.imageUrl,
-                  fit: BoxFit.cover,
-                ),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              //imagem
+              height: 300,
+              width: double.infinity,
+              child: Image.network(
+                meal.imageUrl,
+                fit: BoxFit.cover,
               ),
-              _createSctionTitle(context, 'ingredientes'),
-              _createSctionContainer(
-                ListView.builder(
-                    itemCount: meal.ingredients
-                        .length, //percorre a lista apenas a quantidade de itens da lista
-                    itemBuilder: (ctx, index) {
-                      return Card(
-                        color: Theme.of(context).cardColor,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 5, horizontal: 10),
-                          child: Text(meal.ingredients[index]),
-                        ),
-                      );
-                    }),
-              ),
-              _createSctionTitle(context, 'Passos'),
-              _createSctionContainer(ListView.builder(
-                  itemCount: meal.steps.length,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        ListTile(
-                          leading: CircleAvatar(
-                            child: Text('${index + 1}'),
-                          ),
-                          title: Text(meal.steps[index]),
-                        ),
-                        const Divider()
-                      ],
+            ),
+            _createSctionTitle(context, 'ingredientes'),
+            _createSctionContainer(
+              ListView.builder(
+                  itemCount: meal.ingredients
+                      .length, //percorre a lista apenas a quantidade de itens da lista
+                  itemBuilder: (ctx, index) {
+                    return Card(
+                      color: Theme.of(context).cardColor,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 5, horizontal: 10),
+                        child: Text(meal.ingredients[index]),
+                      ),
                     );
-                  }))
-            ],
-          ),
-        ));
+                  }),
+            ),
+            _createSctionTitle(context, 'Passos'),
+            _createSctionContainer(ListView.builder(
+                itemCount: meal.steps.length,
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      ListTile(
+                        leading: CircleAvatar(
+                          child: Text('${index + 1}'),
+                        ),
+                        title: Text(meal.steps[index]),
+                      ),
+                      const Divider()
+                    ],
+                  );
+                }))
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).pop(meal
+              .title); //adiciono ao pop oq quero retornar para a tela anterior
+        },
+        child: const Icon(Icons.star_outlined),
+      ),
+    );
   }
 }
