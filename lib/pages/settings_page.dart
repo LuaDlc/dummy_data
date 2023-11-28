@@ -1,39 +1,43 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 import '../models/settings.dart';
 import '../widgets/main_drawer.dart';
 
 class SettingsPage extends StatefulWidget {
-  const SettingsPage({super.key});
+  final Function(Settings) onSettingsChanged;
+
+  const SettingsPage(this.onSettingsChanged, {Key? key}) : super(key: key);
 
   @override
   State<SettingsPage> createState() => _SettingsPageState();
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  var settings = Settings();
+
+  Widget _createSwitch(
+    String title,
+    String subtitle,
+    bool value,
+    Function(bool) onChanged,
+  ) {
+    return SwitchListTile.adaptive(
+      title: Text(title),
+      subtitle: Text(subtitle),
+      value: value,
+      onChanged: (value) {
+        onChanged(value);
+        widget.onSettingsChanged(settings);
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    var settings = Settings();
-    //funcao que retorna um switch
-    Widget createSwitch(
-      String title,
-      String subtitle,
-      bool value,
-      Function(bool) onChanged,
-    ) {
-      return SwitchListTile.adaptive(
-          title: Text(title),
-          subtitle: Text(subtitle),
-          value: value,
-          controlAffinity: ListTileControlAffinity.platform,
-          activeColor: Colors.red,
-          onChanged:
-              onChanged); //adaptative pra definir comportamento diferente dependendo do sitema operacional
-    }
-
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Configuracoes'),
+        title: const Text('Configurações'),
       ),
       drawer: const MainDrawer(),
       body: Column(
@@ -41,48 +45,40 @@ class _SettingsPageState extends State<SettingsPage> {
           Container(
             padding: const EdgeInsets.all(20),
             child: Text(
-              'Configuracoes',
-              style: Theme.of(context).textTheme.titleMedium,
+              'Configurações',
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
           ),
           Expanded(
             child: ListView(
               children: [
-                createSwitch(
-                  'sem Glutén',
-                  'só exibe refeicoes sem gluten',
-                  settings.isLactoseFree,
-                  (value) => setState(
-                    () => settings.isLactoseFree = value,
-                  ),
+                _createSwitch(
+                  'Sem Glutén',
+                  'Só exibe refeições sem glúten!',
+                  settings.isGlutenFree,
+                  (value) => setState(() => settings.isGlutenFree = value),
                 ),
-                createSwitch(
+                _createSwitch(
+                  'Sem Lactose',
+                  'Só exibe refeições sem lactose!',
+                  settings.isLactoseFree,
+                  (value) => setState(() => settings.isLactoseFree = value),
+                ),
+                _createSwitch(
                   'Vegana',
-                  'só exibe refeicoes veganas',
+                  'Só exibe refeições veganas!',
                   settings.isVegan,
-                  (value) => setState(
-                    () => settings.isVegan = value,
-                  ),
+                  (value) => setState(() => settings.isVegan = value),
                 ),
-                createSwitch(
-                  'Lactose',
-                  'só exibe refeicoes sem lactose',
-                  settings.isLactoseFree,
-                  (value) => setState(
-                    () => settings.isLactoseFree = value,
-                  ),
-                ),
-                createSwitch(
+                _createSwitch(
                   'Vegetariana',
-                  'só exibe refeicoes vegetarianas',
+                  'Só exibe refeições vegetarianas!',
                   settings.isVegetarian,
-                  (value) => setState(
-                    () => settings.isVegetarian = value,
-                  ),
+                  (value) => setState(() => settings.isVegetarian = value),
                 ),
               ],
             ),
-          ), //usamos o listview sem bulder pois nao precisa criar tela, pois sera feito na mao uma lista exata
+          )
         ],
       ),
     );
